@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TechNova | Gadgets y Tecnología Premium</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+/* ============================================================
+   TechNova — hoja de estilos
+   Paleta: tinta #14173A · índigo #4338F0 · menta #22D3A6 · hielo #F3F5FB
+   Tipografías: Sora (títulos) + Inter (texto)
+   ============================================================ */
+
+:root {
+  --ink: #14173a;
+  --ink-soft: #4a4f77;
+  --muted: #7b80a3;
+  --ice: #f3f5fb;
+  --white: #ffffff;
+  --line: #e2e5f2;
+  --primary: #4338f0;
+  --primary-dark: #2f25c4;
+  --violet: #8b5cf6;
+  --mint: #22d3a6;
+  --sun: #ffb84d;
+
+  --radius-s: 10px;
+  --radius-m: 18px;
+  --radius-l: 28px;
+  --shadow-s: 0 2px 8px rgba(20, 23, 58, 0.06);
+  --shadow-m: 0 14px 40px -12px rgba(20, 23, 58, 0.18);
+  --shadow-l: 0 30px 70px -20px rgba(67, 56, 240, 0.35);
+
+  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 90px; }
+
+body {
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
+
+:focus-visible {
+  outline: 3px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+.container { width: min(1180px, 100% - 48px); margin-inline: auto; }
+
+h1, h2, h3, h4 { font-family: var(--font-display); line-height: 1.12; letter-spacing: -0.025em; }
+
+.gradient-text {
+  background: linear-gradient(100deg, var(--primary) 10%, var(--violet) 60%, #d946ef 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ---------- Botones ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 15px 30px;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+  box-shadow: 0 10px 26px -8px rgba(67, 56, 240, 0.65);
+}
+.btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); }
+.btn-small {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  background: var(--ink);
+  color: var(--white);
+}
+.btn-small:hover { background: var(--primary); }
+
+/* ---------- Barra superior ---------- */
+.top-bar {
+  background: var(--ink);
+  color: #dfe2ff;
+  text-align: center;
+  font-size: 0.84rem;
+  padding: 10px 16px;
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+
+.logo {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.55rem;
+  letter-spacing: -0.04em;
+}
+.logo span { color: var(--mint); }
+
+.nav-links { display: flex; gap: 6px; }
+.nav-links a {
+  padding: 9px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  font-size: 0.94rem;
+  color: var(--ink-soft);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-links a:hover { background: var(--ice); color: var(--primary); }
+
+.nav-actions { display: flex; gap: 8px; }
+.icon-btn {
+  position: relative;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--ice);
+  font-size: 1.1rem;
+  transition: background 0.2s, transform 0.2s;
+}
+.icon-btn:hover { background: #e6e9fa; transform: translateY(-1px); }
+.cart-count {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 0.7rem;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--white);
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 0 110px;
+  background:
+    radial-gradient(900px 500px at 85% 0%, rgba(139, 92, 246, 0.18), transparent 60%),
+    radial-gradient(700px 500px at 0% 100%, rgba(34, 211, 166, 0.14), transparent 60%),
+    var(--ice);
+}
+.hero-grid { display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 60px; align-items: center; }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  background: var(--white);
+  border: 1px solid var(--line);
+  font-size: 0.86rem;
+  font-weight: 600;
+  color: var(--primary);
+  box-shadow: var(--shadow-s);
+  margin-bottom: 26px;
+}
+.hero h1 { font-size: clamp(2.5rem, 5.4vw, 4.3rem); font-weight: 800; margin-bottom: 22px; }
+.hero-content p { font-size: 1.15rem; color: var(--ink-soft); max-width: 46ch; margin-bottom: 36px; }
+
+.hero-visual { position: relative; display: grid; place-items: center; padding: 30px 0; }
+.hero-visual::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  border-radius: 50%;
+  background: conic-gradient(from 140deg, var(--primary), var(--violet), var(--mint), var(--primary));
+  filter: blur(70px);
+  opacity: 0.45;
+}
+
+.hero-card {
+  position: relative;
+  width: min(360px, 100%);
+  border-radius: var(--radius-l);
+  background: linear-gradient(160deg, #1e2158 0%, #14173a 100%);
+  color: var(--white);
+  padding: 22px 26px 34px;
+  box-shadow: var(--shadow-l);
+  transform: rotate(-3deg);
+  transition: transform 0.4s ease;
+}
+.hero-card:hover { transform: rotate(0deg) translateY(-6px); }
+.card-dots { display: flex; gap: 7px; margin-bottom: 14px; }
+.card-dots span { width: 10px; height: 10px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); }
+.card-dots span:first-child { background: #ff6b6b; }
+.card-dots span:nth-child(2) { background: var(--sun); }
+.card-dots span:nth-child(3) { background: var(--mint); }
+
+.card-body { text-align: center; }
+.product-mock {
+  font-size: 6.5rem;
+  line-height: 1;
+  padding: 34px 0;
+  margin-bottom: 18px;
+  border-radius: var(--radius-m);
+  background: radial-gradient(circle at 50% 40%, rgba(139, 92, 246, 0.55), rgba(255, 255, 255, 0.04) 70%);
+  filter: drop-shadow(0 16px 20px rgba(0, 0, 0, 0.35));
+}
+.mock-title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; }
+.mock-price { color: var(--mint); font-weight: 700; font-size: 1.45rem; margin-top: 4px; }
+
+.floating-badge {
+  position: absolute;
+  padding: 11px 18px;
+  border-radius: 999px;
+  background: var(--white);
+  color: var(--ink);
+  font-weight: 600;
+  font-size: 0.86rem;
+  box-shadow: var(--shadow-m);
+}
+.badge-1 { top: 14%; left: -2%; }
+.badge-2 { bottom: 12%; right: -2%; }
+
+/* Única animación autónoma: los badges flotan suavemente */
+@media (prefers-reduced-motion: no-preference) {
+  .floating-badge { animation: float 5s ease-in-out infinite; }
+  .badge-2 { animation-delay: -2.5s; }
+}
+@keyframes float { 50% { transform: translateY(-10px); } }
+
+/* ---------- Secciones ---------- */
+.section { padding: 100px 0; }
+.section-alt { background: var(--ice); }
+
+.section-head { text-align: center; max-width: 640px; margin: 0 auto 56px; }
+.eyebrow {
+  display: inline-block;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(67, 56, 240, 0.09);
+  color: var(--primary);
+  font-weight: 600;
+  font-size: 0.86rem;
+  margin-bottom: 16px;
+}
+.section-head h2 { font-size: clamp(1.9rem, 3.6vw, 2.8rem); font-weight: 700; }
+.section-head p { margin-top: 14px; color: var(--ink-soft); font-size: 1.05rem; }
+
+/* ---------- Categorías ---------- */
+.categories-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.category-card {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  grid-template-areas: "icon title" "icon sub";
+  column-gap: 20px;
+  align-items: center;
+  padding: 26px;
+  border-radius: var(--radius-m);
+  background: var(--white);
+  border: 1px solid var(--line);
+  transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+}
+.category-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-m); border-color: transparent; }
+.cat-icon {
+  grid-area: icon;
+  width: 68px;
+  height: 68px;
+  border-radius: 20px;
+  display: grid;
+  place-items: center;
+  font-size: 1.9rem;
+  background: var(--ice);
+  transition: background 0.25s;
+}
+.category-card:nth-child(3n+1) .cat-icon { background: #ecebff; }
+.category-card:nth-child(3n+2) .cat-icon { background: #e0faf3; }
+.category-card:nth-child(3n) .cat-icon { background: #fff2dc; }
+.category-card h3 { grid-area: title; font-size: 1.15rem; align-self: end; }
+.category-card span:not(.cat-icon) { grid-area: sub; color: var(--muted); font-size: 0.9rem; align-self: start; }
+
+/* ---------- Productos ---------- */
+.products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; }
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--white);
+  border-radius: var(--radius-l);
+  overflow: hidden;
+  box-shadow: var(--shadow-s);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.product-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-m); }
+
+.product-img {
+  display: grid;
+  place-items: center;
+  height: 240px;
+  font-size: 5.5rem;
+  margin: 12px 12px 0;
+  border-radius: 20px;
+}
+.product-img.img-1 { background: linear-gradient(135deg, #dcd9ff, #f0e4ff); }
+.product-img.img-2 { background: linear-gradient(135deg, #c9f7ea, #e2f4ff); }
+.product-img.img-3 { background: linear-gradient(135deg, #ffe9c7, #ffdfe5); }
+
+.product-info { display: flex; flex-direction: column; flex: 1; padding: 24px 26px 28px; }
+.product-info h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 8px; }
+.product-desc { color: var(--ink-soft); font-size: 0.95rem; margin-bottom: 20px; flex: 1; }
+.product-price {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: var(--primary);
+  margin-bottom: 18px;
+}
+.product-info .btn-small { align-self: flex-start; }
+
+/* ---------- Ofertas ---------- */
+.offers-section { padding: 40px 0 100px; }
+.offers-box {
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+  padding: 80px 32px;
+  border-radius: 36px;
+  color: var(--white);
+  background:
+    radial-gradient(500px 300px at 15% 10%, rgba(139, 92, 246, 0.55), transparent 70%),
+    radial-gradient(500px 300px at 90% 100%, rgba(34, 211, 166, 0.35), transparent 70%),
+    var(--ink);
+}
+.offers-box .eyebrow { background: rgba(255, 255, 255, 0.12); color: #cfd2ff; }
+.offers-box h2 { font-size: clamp(2rem, 4vw, 3.1rem); font-weight: 800; margin-bottom: 14px; }
+.offers-box .gradient-text {
+  background-image: linear-gradient(100deg, #a5b4ff, var(--mint));
+}
+.offers-box > p { color: #c4c8ee; font-size: 1.1rem; margin-bottom: 34px; }
+.offers-box .btn-primary { background: var(--white); color: var(--primary); box-shadow: none; }
+.offers-box .btn-primary:hover { background: var(--mint); color: var(--ink); }
+
+.countdown { display: flex; justify-content: center; gap: 14px; margin-top: 48px; flex-wrap: wrap; }
+.countdown div {
+  width: 94px;
+  padding: 18px 0 14px;
+  border-radius: var(--radius-m);
+  background: rgba(255, 255, 255, 0.09);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+}
+.countdown strong {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+.countdown span { font-size: 0.82rem; color: #b9bde8; }
+
+/* ---------- Redes ---------- */
+.social-section { padding: 0 0 100px; }
+.social-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 16px; }
+.social-item {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  font-size: 2rem;
+  border-radius: var(--radius-m);
+  background: var(--ice);
+  transition: transform 0.25s, background 0.25s;
+}
+.social-item:nth-child(1) { background: linear-gradient(135deg, #dcd9ff, #f0e4ff); }
+.social-item:nth-child(2) { background: linear-gradient(135deg, #c9f7ea, #e2f4ff); }
+.social-item:nth-child(3) { background: linear-gradient(135deg, #ffe9c7, #ffdfe5); }
+.social-item:nth-child(4) { background: linear-gradient(135deg, #e2f4ff, #dcd9ff); }
+.social-item:nth-child(5) { background: linear-gradient(135deg, #ffdfe5, #ffe9c7); }
+.social-item:nth-child(6) { background: linear-gradient(135deg, #f0e4ff, #c9f7ea); }
+.social-item:hover { transform: scale(1.05) rotate(-2deg); }
+
+/* ---------- Footer ---------- */
+.footer { background: var(--ink); color: #c4c8ee; padding-top: 80px; }
+.footer-grid { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1.4fr; gap: 48px; padding-bottom: 60px; }
+.footer .logo { color: var(--white); }
+.footer-desc { margin: 18px 0 22px; font-size: 0.94rem; max-width: 34ch; }
+.social-links { display: flex; gap: 10px; }
+.social-links a {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  transition: background 0.2s, transform 0.2s;
+}
+.social-links a:hover { background: var(--primary); transform: translateY(-2px); }
+
+.footer h4 { color: var(--white); font-size: 1.02rem; margin-bottom: 20px; }
+.footer-col li { margin-bottom: 11px; }
+.footer-col li a, .footer-col p { font-size: 0.92rem; }
+.footer-col li a { transition: color 0.2s; }
+.footer-col li a:hover { color: var(--mint); }
+.footer-col p + p { margin-top: 10px; }
+
+.footer-bottom { border-top: 1px solid rgba(255, 255, 255, 0.1); padding: 26px 0; font-size: 0.84rem; color: #9296c4; }
+.footer-bottom .container { display: flex; flex-direction: column; gap: 6px; }
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1000px) {
+  .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
+  .hero-content p { margin-inline: auto; }
+  .categories-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
+  .social-grid { grid-template-columns: repeat(3, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 680px) {
+  .container { width: calc(100% - 32px); }
+  .nav-links { display: none; }
+  .hero { padding: 56px 0 70px; }
+  .section { padding: 70px 0; }
+  .categories-grid, .products-grid { grid-template-columns: 1fr; }
+  .offers-box { padding: 56px 20px; border-radius: 26px; }
+  .countdown div { width: 74px; }
+  .countdown strong { font-size: 1.7rem; }
+  .badge-1 { left: 0; }
+  .badge-2 { right: 0; }
+  .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+}
+
+  </style>
+</head>
+<body>
+
+  <!-- Barra superior -->
+  <div class="top-bar">
+    <p>🚚 Envío gratis en compras superiores a $150.000 | 🔥 Ofertas de temporada</p>
+  </div>
+
+  <!-- Navbar -->
+  <header class="navbar">
+    <div class="container nav-inner">
+      <a href="#" class="logo">TechNova<span>.</span></a>
+      <nav class="nav-links">
+        <a href="#categorias">Categorías</a>
+        <a href="#novedades">Novedades</a>
+        <a href="#ofertas">Ofertas</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" aria-label="Buscar">🔍</button>
+        <button class="icon-btn" aria-label="Carrito">🛒<span class="cart-count">3</span></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        <span class="badge">✨ Nueva colección</span>
+        <h1>Descubre la nueva colección de <span class="gradient-text">gadgets inteligentes</span></h1>
+        <p>Eleva tu día a día con tecnología premium. Diseño, rendimiento y estilo en un solo lugar.</p>
+        <a href="#novedades" class="btn btn-primary">Ver colección</a>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card">
+          <div class="card-dots"><span></span><span></span><span></span></div>
+          <div class="card-body">
+            <div class="product-mock">🎧</div>
+            <p class="mock-title">Auriculares Pro</p>
+            <p class="mock-price">$289.000</p>
+          </div>
+        </div>
+        <div class="floating-badge badge-1">✦ Envío gratis</div>
+        <div class="floating-badge badge-2">⚡ +12k clientes</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Categorías -->
+  <section id="categorias" class="section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Elige una categoría</span>
+        <h2>Encuentra lo que <span class="gradient-text">necesitas</span></h2>
+      </div>
+      <div class="categories-grid">
+        <a href="#" class="category-card">
+          <div class="cat-icon">🎧</div>
+          <h3>Audio</h3>
+          <span>Auriculares y parlantes</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="cat-icon">⌚</div>
+          <h3>Wearables</h3>
+          <span>Smartwatches y bandas</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="cat-icon">💻</div>
+          <h3>Computación</h3>
+          <span>Laptops y accesorios</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="cat-icon">📱</div>
+          <h3>Móviles</h3>
+          <span>Smartphones y tablets</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="cat-icon">🎮</div>
+          <h3>Gaming</h3>
+          <span>Consolas y periféricos</span>
+        </a>
+        <a href="#" class="category-card">
+          <div class="cat-icon">🏠</div>
+          <h3>Hogar Inteligente</h3>
+          <span>Domótica y seguridad</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Novedades -->
+  <section id="novedades" class="section section-alt">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">¡Nueva colección!</span>
+        <h2>Descubre lo nuevo de <span class="gradient-text">TechNova</span> ✨</h2>
+        <p>Productos ideales para mejorar tu productividad, entretenimiento y estilo de vida.</p>
+      </div>
+      <div class="products-grid">
+        <article class="product-card">
+          <div class="product-img img-1">🎧</div>
+          <div class="product-info">
+            <h3>Auriculares inalámbricos Pro</h3>
+            <p class="product-desc">Cancelación de ruido activa, 40h de batería y sonido de alta fidelidad.</p>
+            <span class="product-price">$289.000</span>
+            <a href="#" class="btn btn-small">Ver producto</a>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="product-img img-2">⌚</div>
+          <div class="product-info">
+            <h3>Smartwatch Serie X</h3>
+            <p class="product-desc">Monitoreo de salud, GPS integrado y pantalla AMOLED siempre encendida.</p>
+            <span class="product-price">$459.000</span>
+            <a href="#" class="btn btn-small">Ver producto</a>
+          </div>
+        </article>
+        <article class="product-card">
+          <div class="product-img img-3">🔊</div>
+          <div class="product-info">
+            <h3>Parlante portátil Boom</h3>
+            <p class="product-desc">Sonido envolvente, resistente al agua y hasta 20 horas de reproducción.</p>
+            <span class="product-price">$199.000</span>
+            <a href="#" class="btn btn-small">Ver producto</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ofertas -->
+  <section id="ofertas" class="offers-section">
+    <div class="container offers-box">
+      <span class="eyebrow">¡Los mejores precios!</span>
+      <h2>Descubre nuestras <span class="gradient-text">ofertas</span></h2>
+      <p>Descuentos de hasta 40% en productos seleccionados. Por tiempo limitado.</p>
+      <a href="#" class="btn btn-primary">Ver todas las ofertas</a>
+      <div class="countdown">
+        <div><strong id="cd-d">02</strong><span>Días</span></div>
+        <div><strong id="cd-h">14</strong><span>Horas</span></div>
+        <div><strong id="cd-m">36</strong><span>Min</span></div>
+        <div><strong id="cd-s">09</strong><span>Seg</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Redes sociales -->
+  <section class="social-section">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">@technovastore</span>
+        <h2>Explora nuestras <span class="gradient-text">redes sociales</span></h2>
+      </div>
+      <div class="social-grid">
+        <a href="#" class="social-item">📸</a>
+        <a href="#" class="social-item">📸</a>
+        <a href="#" class="social-item">📸</a>
+        <a href="#" class="social-item">📸</a>
+        <a href="#" class="social-item">📸</a>
+        <a href="#" class="social-item">📸</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contacto" class="footer">
+    <div class="container footer-grid">
+      <div class="footer-col">
+        <a href="#" class="logo">TechNova<span>.</span></a>
+        <p class="footer-desc">Tecnología premium para un estilo de vida conectado. Productos seleccionados con garantía y soporte local.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram">📷</a>
+          <a href="#" aria-label="Facebook">📘</a>
+          <a href="#" aria-label="TikTok">🎵</a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Información</h4>
+        <ul>
+          <li><a href="#">Sobre nosotros</a></li>
+          <li><a href="#">Políticas de privacidad</a></li>
+          <li><a href="#">Términos y condiciones</a></li>
+          <li><a href="#">Trabaja con nosotros</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Enlaces de interés</h4>
+        <ul>
+          <li><a href="#">Envíos y entregas</a></li>
+          <li><a href="#">Cambios y devoluciones</a></li>
+          <li><a href="#">Preguntas frecuentes</a></li>
+          <li><a href="#">Garantía</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Atención al cliente</h4>
+        <p>Horario: Lunes a viernes de 8:00 a.m. a 4:30 p.m. Sábados y domingos de 8:00 a.m. a 7:00 p.m.</p>
+        <p>NIT. 901.374.981-3</p>
+        <p>📧 servicioalcliente@technova.com.co</p>
+        <p>📱 WhatsApp +57 316 3440010</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>Colombia © TechNova 2026. Derechos reservados. Desarrollado por Tita Media | Plataforma Vtex</p>
+        <p class="footer-tags">Términos más buscados: audífonos, smartwatch, parlante bluetooth, laptop gamer</p>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>
+    // Cuenta regresiva real: termina 2 días, 14 h y 36 min después de abrir la página
+    (function () {
+      var fin = Date.now() + ((2 * 24 + 14) * 60 + 36) * 60 * 1000 + 9000;
+      var el = { d: document.getElementById("cd-d"), h: document.getElementById("cd-h"),
+                 m: document.getElementById("cd-m"), s: document.getElementById("cd-s") };
+      function dos(n) { return String(n).padStart(2, "0"); }
+      function tick() {
+        var t = Math.max(0, fin - Date.now());
+        el.d.textContent = dos(Math.floor(t / 864e5));
+        el.h.textContent = dos(Math.floor(t / 36e5) % 24);
+        el.m.textContent = dos(Math.floor(t / 6e4) % 60);
+        el.s.textContent = dos(Math.floor(t / 1e3) % 60);
+      }
+      tick(); setInterval(tick, 1000);
+    })();
+  </script>
+</body>
+</html>
